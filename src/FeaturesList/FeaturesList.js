@@ -7,19 +7,26 @@ export default class FeaturesList extends Component {
     };
 
     render() {
-        const { features } = this.props;
-        const featureKeys = Object.keys(features);
+        const { features, selected, handleUpdate } = this.props;
+
         return (
-            <div className="FeaturesList">
+            <form className="main__form">
                 <h2>Customize your laptop</h2>
-                {featureKeys.map((featureKey, index) => (
+                {Object.keys(features).map((feature, idx) => {
+                    const featureHash = feature + '-' + idx;
+                    const options = features[feature];
+
+                    return (
                     <Feature 
-                        key={feature+index}
-                        feature={featureKey}
-                        featureOptions={features[featureKey]}
+                        key={featureHash}
+                        feature={feature}
+                        options={options}
+                        selectedOption={selected[feature]}
+                        handleUpdate={handleUpdate}
                     />
-                ))}
-            </div>
+                    );
+                })}
+            </form>
         );
     }
 }
