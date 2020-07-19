@@ -7,7 +7,7 @@ export default class FeaturesList extends Component {
     };
 
     render() {
-        const { features, selected, handleUpdate } = this.props;
+        const { features, selected, handleUpdate, currencyFormat } = this.props;
 
         return (
             <form className="main__form">
@@ -22,6 +22,7 @@ export default class FeaturesList extends Component {
                         feature={feature}
                         options={options}
                         selectedOption={selected[feature]}
+                        currencyFormat={currencyFormat}
                         handleUpdate={handleUpdate}
                     />
                     );

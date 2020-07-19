@@ -5,20 +5,13 @@ import FeatureOption from "../FeatureOption/FeatureOption";
 // in both URLs and html attributes
 import slugify from 'slugify';
 
-// This object will allow us to
-// easily convert numbers into US dollar values
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-});
-
 export default class Feature extends Component {
     static defaultProps = {
         options: []
     };
 
     render() {
-        const { feature, options, selectedOption, handleUpdate } = this.props;
+        const { feature, options, selectedOption, handleUpdate, currencyFormat } = this.props;
 
         return (
             <fieldset className="feature">
@@ -33,8 +26,9 @@ export default class Feature extends Component {
                             key={itemHash}
                             id={itemHash}
                             name={item.name}
-                            cost={USCurrencyFormat.format(item.cost)}
-                            feature={slugify(feature)}
+                            cost={item.cost}
+                            currencyFormat={currencyFormat}
+                            feature={feature}
                             selected={item.name === selectedOption.name}
                             handleUpdate={handleUpdate}
                         />
