@@ -4,46 +4,42 @@ import CartTotal from '../CartTotal/CartTotal';
 
 export default class Cart extends Component {
     static defaultProps = {
-        selectedFeatureOptions: {}
+        selected: {}
     };
 
-    renderCartItems(selectedFeatureOptions) {
-        const features = Object.keys(selectedFeatureOptions);
-
-        return features.map((feature, index) => {
-            const selectedFeatureOption = selectedFeatureOptions[feature];
+    renderCartItems(selected, currencyFormat) {
+        return Object.keys(selected).map((feature, idx) => {
+            const featureHash = feature + "-" + idx;
+            const selectedOption = selected[feature];
 
             return (
-            <CartItem 
-                key={index}
-                feature
-                cost={selectedFeatureOption.cost}
-                name={selectedFeatureOption.name}
-            />
+                <CartItem 
+                    key={featureHash}
+                    feature={feature}
+                    cost={selectedOption.cost}
+                    name={selectedOption.name}
+                    currencyFormat={currencyFormat}
+                />
             );
-        });
+        })
     }
 
-    calculateCartTotal(selectedFeatureOptions) {
-        let total = 0;
-        for(const selectedFeatureOption in selectedFeatureOptions) {
-            total += selectedFeatureOption.cost;
-        }
-        
-        return total;
+    calculateCartTotal(selected) {
+        return Object.keys(selected).reduce((acc, curr) => acc + selected[curr].cost, 0);
     }
 
     render() {
-        const { selectedFeatureOptions } = this.props;
-        const cartItems = this.renderCartItems(selectedFeatureOptions);
-        const cartTotal = this.calculateCartTotal(selectedFeatureOptions);
+        const { selected, currencyFormat } = this.props;
+        
+        const cartTotal = this.calculateCartTotal(selected);
 
         return (
-            <div className="Cart">
+            <section className="main__summary">
                 <h2>Your cart</h2>
-                {cartItems}
-                <CartTotal total={cartTotal} />
-            </div>
+                {this.renderCartItems(selected, currencyFormat)}
+                <CartTotal total={cartTotal} currencyFormat={currencyFormat} />
+            </section>
+
         );
     }
 }
