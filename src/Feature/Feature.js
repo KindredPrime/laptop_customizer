@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FeatureOption from "../FeatureOption/FeatureOption";
+import './Feature.css';
 
 // Normalizes string as a slug - a string that is safe to use
 // in both URLs and html attributes

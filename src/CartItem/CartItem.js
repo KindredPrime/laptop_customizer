@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './CartItem.css';
 
 export default class CartItem extends Component {
     static defaultProps = {

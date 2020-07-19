@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CartItem from '../CartItem/CartItem';
 import CartTotal from '../CartTotal/CartTotal';
+import './Cart.css';
 
 export default class Cart extends Component {
     static defaultProps = {

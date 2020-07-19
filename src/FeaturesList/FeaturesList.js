@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Feature from '../Feature/Feature';
+import './FeaturesList.css'
 
 export default class FeaturesList extends Component {
     static defaultProps ={
