@@ -6,6 +6,14 @@ import './FeatureOption.css';
 import slugify from 'slugify';
 
 export default class FeatureOption extends Component {
+    static defaultProps ={
+        feature: "",
+        currencyFormat: new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD'
+        })
+    };
+
     render() {
         const { id, name, cost, feature, selected, handleUpdate, currencyFormat } = this.props;
 
